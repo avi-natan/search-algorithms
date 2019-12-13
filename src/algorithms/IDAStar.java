@@ -35,22 +35,22 @@ public class IDAStar implements SearchAlgorithm {
 		
 		while(true) {
 			double t = search(path, 0, threshold, visited);
+			
+			// ** For debug **
+			System.out.print("Visited for threshold " + threshold + ": ");
+			for(Node n : visited) {
+				System.out.print(n.getName());
+			}
+			System.out.println("");
+			while(!visited.isEmpty()) {
+				visited.remove(0);
+			}
+			visited.add(root);
+			// ** For debug **
+			
 			if(t == -1) {
 				return path;
 			} else {
-				
-				// ** For debug **
-				System.out.print("Visited for threshold " + threshold + ": ");
-				for(Node n : visited) {
-					System.out.print(n.getName());
-				}
-				System.out.println("");
-				while(!visited.isEmpty()) {
-					visited.remove(0);
-				}
-				visited.add(root);
-				// ** For debug **
-				
 				threshold = t;
 			}
 		}
@@ -60,14 +60,17 @@ public class IDAStar implements SearchAlgorithm {
 		Node node = path.get(path.size() - 1);
 		double f = g + node.getHeuristic();
 		if(f > threshold) return f;
-		if(node.isGoal()) return -1;
+		
+		// ** For debug **
+		if(!visited.contains(node)) visited.add(node);
+		// ** For debug **
+		
+		if(node.isGoal()) {
+			System.out.println("found!");
+			return -1;
+		}
 		double min = Double.MAX_VALUE;
 		for(Successor succ : node.getSuccessors()) {
-			
-			// ** For debug **
-			if(!visited.contains(succ.getNode())) visited.add(succ.getNode());
-			// ** For debug **
-			
 			if(!path.contains(succ.getNode())) {
 				path.add(succ.getNode());
 				double t = search(path, g + succ.getCost(), threshold, visited);
