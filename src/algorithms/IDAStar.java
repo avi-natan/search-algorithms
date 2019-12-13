@@ -1,5 +1,82 @@
 package algorithms;
 
-public class IDAStar {
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Implementation of the algorithm pseudo code as described in https://en.wikipedia.org/wiki/Iterative_deepening_A*
+ * 
+ * @author Avi
+ *
+ */
+public class IDAStar implements SearchAlgorithm {
+
+	private Node root;
+	
+	public IDAStar (Node root) {
+		this.root = root;
+	}
+	
+	@Override
+	public List<Node> findPathToGoal() {
+		return ida_star(this.root);
+	}
+	
+	
+	private List<Node> ida_star(Node root) {
+		double threshold = root.getHeuristic();
+		List<Node> path = new ArrayList<Node>();
+		path.add(root);
+		
+		// ** For debug **
+		List<Node> visited = new ArrayList<Node>();
+		visited.add(root);
+		// ** For debug **
+		
+		while(true) {
+			double t = search(path, 0, threshold, visited);
+			if(t == -1) {
+				return path;
+			} else {
+				
+				// ** For debug **
+				System.out.print("Visited for threshold " + threshold + ": ");
+				for(Node n : visited) {
+					System.out.print(n.getName());
+				}
+				System.out.println("");
+				while(!visited.isEmpty()) {
+					visited.remove(0);
+				}
+				visited.add(root);
+				// ** For debug **
+				
+				threshold = t;
+			}
+		}
+	}
+	
+	private double search(List<Node> path, double g, double threshold, List<Node> visited) {
+		Node node = path.get(path.size() - 1);
+		double f = g + node.getHeuristic();
+		if(f > threshold) return f;
+		if(node.isGoal()) return -1;
+		double min = Double.MAX_VALUE;
+		for(Successor succ : node.getSuccessors()) {
+			
+			// ** For debug **
+			if(!visited.contains(succ.getNode())) visited.add(succ.getNode());
+			// ** For debug **
+			
+			if(!path.contains(succ.getNode())) {
+				path.add(succ.getNode());
+				double t = search(path, g + succ.getCost(), threshold, visited);
+				if(t == -1) return -1;
+				if(t < min) min = t;
+				path.remove(path.size() - 1);
+			}
+		}
+		return min;
+	}
 
 }
