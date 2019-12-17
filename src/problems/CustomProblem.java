@@ -23,33 +23,41 @@ public class CustomProblem {
 		 *          h (6)   i (7)
 		 * 
 		 */
-
+        //create initial node (root node)
 		CustomProblemNode a = new CustomProblemNode("a", 4, false);
-		CustomProblemNode b = new CustomProblemNode("b", 4, false);
-		CustomProblemNode c = new CustomProblemNode("c", 6, false);
-		CustomProblemNode d = new CustomProblemNode("d", 5, false);
-		CustomProblemNode e = new CustomProblemNode("e", 6, false);
-		CustomProblemNode f = new CustomProblemNode("f", 7, false);
-		CustomProblemNode g = new CustomProblemNode("g", 5, false);
-		CustomProblemNode h = new CustomProblemNode("h", 6, true);
-		CustomProblemNode i = new CustomProblemNode("i", 7, false);
-		
-		a.addSuccessor(1, b);
-		a.addSuccessor(1, c);
-		b.addSuccessor(1, d);
-		b.addSuccessor(1, e);
-		d.addSuccessor(1, f);
-		d.addSuccessor(1, g);
-		g.addSuccessor(1, h);
-		g.addSuccessor(1, i);
-		
+		// generate the graph with the following parameters
+        // h_increase - how much the heuristic increases between father to child (we random between 0 to that value)
+        // b_low - minimum number of children for each node
+        // b_high - maximum number of children for each node
+        // current height - it is recursive, so it is the current height (level in the graph)
+        // height - the maximum depth of the graph.
+        // the goal is every vertex in the last level (we can change it later)
+
+		generate_graph(a, 2, 4,6,0,6);
+
 		SearchAlgorithm sa = new IDAStar(a);
 		List<Node> path = sa.findPathToGoal();
 		for(Node n : path) {
-			System.out.print(n.getName() + " ");
+			System.out.print(n.getName() + ",");
 		}
 		System.out.println("");
 		System.out.println("fin");
 	}
 
+	private static void generate_graph(CustomProblemNode root, int h_increase, int b_low, int b_high, int current_height,int height) {
+		if(current_height<height)
+		{
+			boolean isGoal=false;
+			if(current_height==(height-1))
+				isGoal=true;
+			int b_factor = (int )((Math.random() * (b_high - b_low)) + b_low);
+			for(int child=0; child<b_factor; child++)
+			{
+				int h_factor = (int )((Math.random() * h_increase));
+				CustomProblemNode tmp_child = new CustomProblemNode(root.getName() + String.valueOf(child), root.getHeuristic() + h_factor, isGoal);
+				root.addSuccessor(1, tmp_child);
+				generate_graph(tmp_child, h_increase,b_low,b_high, current_height+1,height);
+			}
+		}
+	}
 }

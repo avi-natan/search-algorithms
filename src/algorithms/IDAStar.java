@@ -39,7 +39,7 @@ public class IDAStar implements SearchAlgorithm {
 			// ** For debug **
 			System.out.print("Visited for threshold " + threshold + ": ");
 			for(Node n : visited) {
-				System.out.print(n.getName());
+				System.out.print(n.getName() + ",");
 			}
 			System.out.println("");
 			while(!visited.isEmpty()) {
