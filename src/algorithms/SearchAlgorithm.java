@@ -4,6 +4,6 @@ import java.util.List;
 
 public interface SearchAlgorithm {
 
-	public List<Node> findPathToGoal();
+	public List<IDAStarNode> findPathToGoal();
 	
 }

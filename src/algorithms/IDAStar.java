@@ -11,25 +11,25 @@ import java.util.List;
  */
 public class IDAStar implements SearchAlgorithm {
 
-	private Node root;
+	private IDAStarNode root;
 	
-	public IDAStar (Node root) {
+	public IDAStar (IDAStarNode root) {
 		this.root = root;
 	}
 	
 	@Override
-	public List<Node> findPathToGoal() {
+	public List<IDAStarNode> findPathToGoal() {
 		return ida_star(this.root);
 	}
 	
 	
-	private List<Node> ida_star(Node root) {
+	private List<IDAStarNode> ida_star(IDAStarNode root) {
 		double threshold = root.getHeuristic();
-		List<Node> path = new ArrayList<Node>();
+		List<IDAStarNode> path = new ArrayList<IDAStarNode>();
 		path.add(root);
 		
 		// ** For debug **
-		List<Node> visited = new ArrayList<Node>();
+		List<IDAStarNode> visited = new ArrayList<IDAStarNode>();
 		visited.add(root);
 		// ** For debug **
 		
@@ -38,7 +38,7 @@ public class IDAStar implements SearchAlgorithm {
 			
 			// ** For debug **
 			System.out.print("Visited for threshold " + threshold + ": ");
-			for(Node n : visited) {
+			for(IDAStarNode n : visited) {
 				System.out.print(n.getName() + ",");
 			}
 			System.out.println("");
@@ -56,8 +56,8 @@ public class IDAStar implements SearchAlgorithm {
 		}
 	}
 	
-	private double search(List<Node> path, double g, double threshold, List<Node> visited) {
-		Node node = path.get(path.size() - 1);
+	private double search(List<IDAStarNode> path, double g, double threshold, List<IDAStarNode> visited) {
+		IDAStarNode node = path.get(path.size() - 1);
 		double f = g + node.getHeuristic();
 		if(f > threshold) return f;
 		
@@ -70,7 +70,7 @@ public class IDAStar implements SearchAlgorithm {
 			return -1;
 		}
 		double min = Double.MAX_VALUE;
-		for(Neighbor succ : node.getSuccessors()) {
+		for(IDAStarSuccessor succ : node.getSuccessors()) {
 			if(!path.contains(succ.getNode())) {
 				path.add(succ.getNode());
 				double t = search(path, g + succ.getCost(), threshold, visited);

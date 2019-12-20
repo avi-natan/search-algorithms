@@ -1,11 +1,11 @@
 package algorithms;
 
-public class Neighbor {
+public class IDAStarSuccessor {
 
 	private double cost;
-	private Node node;
+	private IDAStarNode node;
 	
-	public Neighbor(double cost, Node node) {
+	public IDAStarSuccessor(double cost, IDAStarNode node) {
 		this.cost = cost;
 		this.node = node;
 	}
@@ -14,7 +14,7 @@ public class Neighbor {
 		return this.cost;
 	}
 	
-	public Node getNode() {
+	public IDAStarNode getNode() {
 		return this.node;
 	}
 	

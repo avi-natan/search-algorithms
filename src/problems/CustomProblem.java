@@ -3,7 +3,7 @@ package problems;
 import java.util.List;
 
 import algorithms.IDAStar;
-import algorithms.Node;
+import algorithms.IDAStarNode;
 import algorithms.SearchAlgorithm;
 
 public class CustomProblem {
@@ -24,7 +24,7 @@ public class CustomProblem {
 		 * 
 		 */
         //create initial node (root node)
-		CustomProblemNode a = new CustomProblemNode("a", 4, false);
+		CustomProblemIDAStarNode a = new CustomProblemIDAStarNode("a", 4, false);
 		// generate the graph with the following parameters
         // h_increase - how much the heuristic increases between father to child (we random between 0 to that value)
         // b_low - minimum number of children for each node
@@ -36,15 +36,15 @@ public class CustomProblem {
 		generate_graph(a, 2, 4,6,0,6);
 
 		SearchAlgorithm sa = new IDAStar(a);
-		List<Node> path = sa.findPathToGoal();
-		for(Node n : path) {
+		List<IDAStarNode> path = sa.findPathToGoal();
+		for(IDAStarNode n : path) {
 			System.out.print(n.getName() + ",");
 		}
 		System.out.println("");
 		System.out.println("fin");
 	}
 
-	private static void generate_graph(CustomProblemNode root, int h_increase, int b_low, int b_high, int current_height,int height) {
+	private static void generate_graph(CustomProblemIDAStarNode root, int h_increase, int b_low, int b_high, int current_height,int height) {
 		if(current_height<height)
 		{
 			boolean isGoal=false;
@@ -54,7 +54,7 @@ public class CustomProblem {
 			for(int child=0; child<b_factor; child++)
 			{
 				int h_factor = (int )((Math.random() * h_increase));
-				CustomProblemNode tmp_child = new CustomProblemNode(root.getName() + String.valueOf(child), root.getHeuristic() + h_factor, isGoal);
+				CustomProblemIDAStarNode tmp_child = new CustomProblemIDAStarNode(root.getName() + String.valueOf(child), root.getHeuristic() + h_factor, isGoal);
 				root.addSuccessor(1, tmp_child);
 				generate_graph(tmp_child, h_increase,b_low,b_high, current_height+1,height);
 			}
