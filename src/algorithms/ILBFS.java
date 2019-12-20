@@ -2,9 +2,8 @@ package algorithms;
 
 import java.util.List;
 
-public class ILBFS implements SearchAlgorithm {
+public class ILBFS {
 
-	@Override
 	public List<IDAStarNode> findPathToGoal() {
 		// TODO Auto-generated method stub
 		return null;

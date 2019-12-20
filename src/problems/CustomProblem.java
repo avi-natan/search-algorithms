@@ -4,7 +4,6 @@ import java.util.List;
 
 import algorithms.IDAStar;
 import algorithms.IDAStarNode;
-import algorithms.SearchAlgorithm;
 
 public class CustomProblem {
 
@@ -35,7 +34,7 @@ public class CustomProblem {
 
 		generate_graph(a, 2, 4,6,0,6);
 
-		SearchAlgorithm sa = new IDAStar(a);
+		IDAStar sa = new IDAStar(a);
 		List<IDAStarNode> path = sa.findPathToGoal();
 		for(IDAStarNode n : path) {
 			System.out.print(n.getName() + ",");

@@ -9,7 +9,7 @@ import java.util.List;
  * @author Avi
  *
  */
-public class IDAStar implements SearchAlgorithm {
+public class IDAStar {
 
 	private IDAStarNode root;
 	
@@ -17,7 +17,6 @@ public class IDAStar implements SearchAlgorithm {
 		this.root = root;
 	}
 	
-	@Override
 	public List<IDAStarNode> findPathToGoal() {
 		return ida_star(this.root);
 	}
