@@ -70,7 +70,7 @@ public class IDAStar implements SearchAlgorithm {
 			return -1;
 		}
 		double min = Double.MAX_VALUE;
-		for(Successor succ : node.getSuccessors()) {
+		for(Neighbor succ : node.getSuccessors()) {
 			if(!path.contains(succ.getNode())) {
 				path.add(succ.getNode());
 				double t = search(path, g + succ.getCost(), threshold, visited);

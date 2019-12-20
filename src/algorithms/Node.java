@@ -6,7 +6,8 @@ public interface Node {
 	
 	public String getName();
 	public boolean isGoal();
-	public List<Successor> getSuccessors();
+	public List<Neighbor> getSuccessors();
+	public Neighbor getParent();
 	public double getHeuristic();
 
 }

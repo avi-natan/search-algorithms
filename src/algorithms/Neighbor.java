@@ -1,11 +1,11 @@
 package algorithms;
 
-public class Successor {
+public class Neighbor {
 
 	private double cost;
 	private Node node;
 	
-	public Successor(double cost, Node node) {
+	public Neighbor(double cost, Node node) {
 		this.cost = cost;
 		this.node = node;
 	}
