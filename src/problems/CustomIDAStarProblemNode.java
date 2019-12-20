@@ -6,14 +6,14 @@ import java.util.List;
 import algorithms.IDAStarSuccessor;
 import algorithms.IDAStarNode;
 
-public class CustomProblemIDAStarNode implements IDAStarNode {
+public class CustomIDAStarProblemNode implements IDAStarNode {
 	
 	private String name;
 	private double heuristic;
 	private boolean isGoal;
 	private List<IDAStarSuccessor> successors;
 	
-	public CustomProblemIDAStarNode(String name, double heuristic, boolean isGoal) {
+	public CustomIDAStarProblemNode(String name, double heuristic, boolean isGoal) {
 		this.name = name;
 		this.heuristic = heuristic;
 		this.isGoal = isGoal;
