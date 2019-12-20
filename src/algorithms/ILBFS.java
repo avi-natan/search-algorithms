@@ -28,11 +28,35 @@ public class ILBFS {
 		// the path to return
 		List<ILBFSNode> path = new ArrayList<ILBFSNode>();
 		
+		// set root.F to root.f
+		root.setF(root.getf());
+		
 		// Insert R into OPEN and TREE
 		PriorityQueue<ILBFSNode> open = new PriorityQueue<ILBFSNode>(new Comparator<ILBFSNode>() {
 			@Override
-			public int compare(ILBFSNode arg0, ILBFSNode arg1) {
-				return (int) (arg0.getf() - arg1.getf());
+			public int compare(ILBFSNode first, ILBFSNode second) {
+				// comparing to the F. prio to the greater F
+				if(first.getF() < second.getF()) {
+					return -1;
+				} else if (first.getF() > second.getF()) {
+					return 1;
+				} else {
+					// F is same, comparing if the node is collapsed or not. prio to the one that is not collapsed
+					if(first.getF() == first.getf() && second.getF() > second.getf()) {
+						return -1;
+					} else if(first.getF() > first.getf() && second.getF() == second.getf()) {
+						return 1;
+					} else {
+						// both nodes are collapsed or both are not collapsed, compare lexicographically. lexical prio
+						if (first.getName().compareTo(second.getName()) < 0) {
+							return -1;
+						} else if(first.getName().compareTo(second.getName()) > 0) {
+							return 1;
+						} else {
+							return 0;
+						}
+					}
+				}
 			}
 		});
 		List<ILBFSNode> tree = new ArrayList<ILBFSNode>();
@@ -64,18 +88,23 @@ public class ILBFS {
 			while(oldbest != null && !oldbest.equals(best.getParent())) {
 				// oldbest.val <- min(values of oldbest children)
 				List<ILBFSNode> oldbestChildren = oldbest.getChildren();
-				Double minFVal = oldbestChildren.get(0).getF();
-				for(ILBFSNode child : oldbestChildren) {
-					minFVal = Math.min(minFVal, child.getF());
-				}
-				oldbest.setF(minFVal);
-				
-				// Insert oldbest to OPEN
-				open.add(oldbest);
-				
-				// Delete all children of oldbest from OPEN and TREE
-				for(ILBFSNode child : oldbestChildren) {
-					open.remove(child);
+				// do this only if this node has children (i.e. not a dead end)
+				if(!oldbestChildren.isEmpty()) {
+					Double minFVal = Double.MAX_VALUE;
+					for(ILBFSNode child : oldbestChildren) {
+						minFVal = Math.min(minFVal, child.getF());
+					}
+					oldbest.setF(minFVal);
+					// Insert oldbest to OPEN
+					open.add(oldbest);
+					// Delete all children of oldbest from OPEN and TREE
+					for(ILBFSNode child : oldbestChildren) {
+						open.remove(child);
+						tree.remove(child);
+					}
+				} else {
+					oldbest.setF(Double.MAX_VALUE);
+					oldbest.setf(Double.MAX_VALUE);
 				}
 				
 				// oldbest <- oldbest.parent
