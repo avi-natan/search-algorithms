@@ -88,6 +88,8 @@ public class ILBFS {
 			System.out.println("Iteration: " + iteration);
 			System.out.println("Times seen: " + state_names.get(best.getName()));
 			System.out.println("Open list size after best extraction: " + open.size());
+			System.out.println("best.g: " + best.getg());
+			System.out.println("best.h: " + best.geth());
 			System.out.println("best.f: " + best.getf());
 			System.out.println("best.F: " + best.getF());
 			best.drawState();
