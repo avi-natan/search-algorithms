@@ -7,11 +7,13 @@ public interface ILBFSNode {
 	public String getName();
 	public boolean isGoal();
 	public List<ILBFSNode> getChildren();
+	public double getg();
+	public double geth();
 	public double getf();
 	public double getF();
-	public double geth();
 	public void setf(double f);
 	public void setF(double F);
 	public ILBFSNode getParent();
+	public void drawState();
 
 }

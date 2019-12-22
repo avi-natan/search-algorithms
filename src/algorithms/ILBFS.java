@@ -2,7 +2,9 @@ package algorithms;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.PriorityQueue;
 
 /**
@@ -25,6 +27,11 @@ public class ILBFS {
 	}
 	
 	private List<ILBFSNode> ilbfs(ILBFSNode root) {
+		// ********** DEBUG ************
+		Map<String, Integer> state_names = new HashMap<String, Integer>();
+		int iteration = 0;
+		// ********** DEBUG ************
+		
 		// the path to return
 		List<ILBFSNode> path = new ArrayList<ILBFSNode>();
 		
@@ -70,6 +77,22 @@ public class ILBFS {
 		while(!open.isEmpty()) {
 			// best=extract min(OPEN)
 			ILBFSNode best = open.remove();
+			
+			// ********** DEBUG ************
+			iteration++;
+			if(state_names.containsKey(best.getName())) {
+				state_names.put(best.getName(), state_names.get(best.getName()) + 1);
+			} else {
+				state_names.put(best.getName(), 1);
+			}
+			System.out.println("Iteration: " + iteration);
+			System.out.println("Times seen: " + state_names.get(best.getName()));
+			System.out.println("Open list size after best extraction: " + open.size());
+			System.out.println("best.f: " + best.getf());
+			System.out.println("best.F: " + best.getF());
+			best.drawState();
+			System.out.println("");
+			// ********** DEBUG ************
 			
 			// if the best is a goal state, construct the path and return it
 			// if goal(best) then

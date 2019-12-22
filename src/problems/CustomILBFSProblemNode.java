@@ -10,6 +10,7 @@ public class CustomILBFSProblemNode implements ILBFSNode{
 	private String name;
 	private boolean isGoal;
 	private List<ILBFSNode> children;
+	private double g;
 	private double f;
 	private double F;
 	private double h;
@@ -47,6 +48,11 @@ public class CustomILBFSProblemNode implements ILBFSNode{
 	public List<ILBFSNode> getChildren() {
 		return this.children;
 	}
+	
+	@Override
+	public double getg() {
+		return this.g;
+	}
 
 	@Override
 	public double getf() {
@@ -76,6 +82,11 @@ public class CustomILBFSProblemNode implements ILBFSNode{
 	@Override
 	public ILBFSNode getParent() {
 		return this.parent;
+	}
+
+	@Override
+	public void drawState() {
+		System.out.println(this.name);
 	}
 
 }
