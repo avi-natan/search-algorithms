@@ -54,20 +54,20 @@ public class FifteenPuzzle {
 //		System.out.println("moves: " + (path1.size() - 1));
 		
 		// solving for state 2
-//		int[][] startState2 = new int[][] 
-//				{	{0, 1, 2, 3},
-//					{6, 4, 5, 7},
-//					{8, 9, 10, 11},
-//					{12, 13, 14, 15}
-//				};
-//		ILBFSNode start2 = new FifteenPuzzleILBFSNode(startState2, null, 0);
-//		ILBFS ilbfs2 = new ILBFS(start2);
-//		List<ILBFSNode> path2 = ilbfs2.findPathToGoal();
-//		System.out.println("path to goal:");
-//		for(ILBFSNode n : path2) {
-//			n.drawState();
-//		}
-//		System.out.println("moves: " + (path2.size() - 1));
+		int[][] startState2 = new int[][] 
+				{	{0, 1, 2, 3},
+					{6, 4, 5, 7},
+					{8, 9, 10, 11},
+					{12, 13, 14, 15}
+				};
+		ILBFSNode start2 = new FifteenPuzzleILBFSNode(startState2, null, 0);
+		ILBFS ilbfs2 = new ILBFS(start2);
+		List<ILBFSNode> path2 = ilbfs2.findPathToGoal();
+		System.out.println("path to goal:");
+		for(ILBFSNode n : path2) {
+			n.drawState();
+		}
+		System.out.println("moves: " + (path2.size() - 1));
 		
 		// solving for state 3
 //		int[][] startState3 = new int[][] 
@@ -86,20 +86,36 @@ public class FifteenPuzzle {
 //		System.out.println("moves: " + (path3.size() - 1));
 		
 		// solving for state 4
-		int[][] startState4 = new int[][] 
-				{	{0, 1, 6, 3},
-					{4, 2, 5, 7},
-					{8, 9, 10, 11},
-					{12, 13, 14, 15}
-				};
-		ILBFSNode start4 = new FifteenPuzzleILBFSNode(startState4, null, 0);
-		ILBFS ilbfs4 = new ILBFS(start4);
-		List<ILBFSNode> path4 = ilbfs4.findPathToGoal();
-		System.out.println("path to goal:");
-		for(ILBFSNode n : path4) {
-			n.drawState();
-		}
-		System.out.println("moves: " + (path4.size() - 1));
+//		int[][] startState4 = new int[][] 
+//				{	{0, 1, 6, 3},
+//					{4, 2, 5, 7},
+//					{8, 9, 10, 11},
+//					{12, 13, 14, 15}
+//				};
+//		ILBFSNode start4 = new FifteenPuzzleILBFSNode(startState4, null, 0);
+//		ILBFS ilbfs4 = new ILBFS(start4);
+//		List<ILBFSNode> path4 = ilbfs4.findPathToGoal();
+//		System.out.println("path to goal:");
+//		for(ILBFSNode n : path4) {
+//			n.drawState();
+//		}
+//		System.out.println("moves: " + (path4.size() - 1));
+		
+		// solving for state 5
+//		int[][] startState5 = new int[][] 
+//				{	{8, 0, 9, 6},
+//					{15, 2, 7, 11},
+//					{1, 6, 3, 13},
+//					{14, 10, 4, 12}
+//				};
+//		ILBFSNode start5 = new FifteenPuzzleILBFSNode(startState5, null, 0);
+//		ILBFS ilbfs5 = new ILBFS(start5);
+//		List<ILBFSNode> path5 = ilbfs5.findPathToGoal();
+//		System.out.println("path to goal:");
+//		for(ILBFSNode n : path5) {
+//			n.drawState();
+//		}
+//		System.out.println("moves: " + (path5.size() - 1));
 		
 	}
 

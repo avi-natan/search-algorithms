@@ -182,16 +182,17 @@ public class FifteenPuzzleILBFSNode implements ILBFSNode {
 		// for each tile in the state
 		for(int state_i = 0; state_i < 4; state_i++) {
 			for(int state_j = 0; state_j < 4; state_j++) {
-				
-				// find its coordinates in the goal
-				for(int goal_i = 0; goal_i < 4; goal_i++) {
-					for(int goal_j = 0; goal_j < 4; goal_j++) {
-						if(this.state[state_i][state_j] == GOAL_STATE[goal_i][goal_j]) {
-							h += Math.abs(goal_i - state_i) + Math.abs(goal_j - state_j);
+				// ... except the blank
+				if(this.state[state_i][state_j] != 0) {
+					// find its coordinates in the goal
+					for(int goal_i = 0; goal_i < 4; goal_i++) {
+						for(int goal_j = 0; goal_j < 4; goal_j++) {
+							if(this.state[state_i][state_j] == GOAL_STATE[goal_i][goal_j]) {
+								h += Math.abs(goal_i - state_i) + Math.abs(goal_j - state_j);
+							}
 						}
 					}
 				}
-				
 			}
 		}
 		
