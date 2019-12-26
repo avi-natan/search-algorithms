@@ -13,7 +13,7 @@ public class FifteenPuzzle {
 		
 		System.out.println("problem start");
 		
-		testIDAStar();
+//		testIDAStar();
 		testILBFS();
 		
 		System.out.println("problem end");
