@@ -42,7 +42,7 @@ public class ILBFS {
 		PriorityQueue<ILBFSNode> open = new PriorityQueue<ILBFSNode>(new Comparator<ILBFSNode>() {
 			@Override
 			public int compare(ILBFSNode first, ILBFSNode second) {
-				// comparing to the F. prio to the greater F
+				// comparing to the F. prio to the smaller F
 				if(first.getF() < second.getF()) {
 					return -1;
 				} else if (first.getF() > second.getF()) {
