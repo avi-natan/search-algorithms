@@ -199,6 +199,7 @@ public class FifteenPuzzleILBFSNode implements ILBFSNode {
 		return h;
 	}
 	
+	@Override
 	public void drawState() {
 		for(int i = 0; i < 3; i++) {
 			for(int j = 0; j < 3; j++) {

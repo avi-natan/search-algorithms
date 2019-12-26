@@ -8,5 +8,6 @@ public interface IDAStarNode {
 	public boolean isGoal();
 	public List<IDAStarSuccessor> getSuccessors();
 	public double getHeuristic();
+	public void drawState();
 
 }

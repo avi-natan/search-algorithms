@@ -44,5 +44,10 @@ public class CustomIDAStarProblemNode implements IDAStarNode {
 	public double getHeuristic() {
 		return this.heuristic;
 	}
+	
+	@Override
+	public void drawState() {
+		System.out.println(this.name);
+	}
 
 }

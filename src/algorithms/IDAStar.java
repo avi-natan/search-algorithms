@@ -13,8 +13,13 @@ public class IDAStar {
 
 	private IDAStarNode root;
 	
+	// ******   debug ******
+	int iteration = 0;
+	// ******   debug ******
+	
 	public IDAStar (IDAStarNode root) {
 		this.root = root;
+		this.iteration = 0;
 	}
 	
 	public List<IDAStarNode> findPathToGoal() {
@@ -27,26 +32,8 @@ public class IDAStar {
 		List<IDAStarNode> path = new ArrayList<IDAStarNode>();
 		path.add(root);
 		
-		// ** For debug **
-		List<IDAStarNode> visited = new ArrayList<IDAStarNode>();
-		visited.add(root);
-		// ** For debug **
-		
 		while(true) {
-			double t = search(path, 0, threshold, visited);
-			
-			// ** For debug **
-			System.out.print("Visited for threshold " + threshold + ": ");
-			for(IDAStarNode n : visited) {
-				System.out.print(n.getName() + ",");
-			}
-			System.out.println("");
-			while(!visited.isEmpty()) {
-				visited.remove(0);
-			}
-			visited.add(root);
-			// ** For debug **
-			
+			double t = search(path, 0, threshold);
 			if(t == -1) {
 				return path;
 			} else {
@@ -55,14 +42,21 @@ public class IDAStar {
 		}
 	}
 	
-	private double search(List<IDAStarNode> path, double g, double threshold, List<IDAStarNode> visited) {
+	private double search(List<IDAStarNode> path, double g, double threshold) {
 		IDAStarNode node = path.get(path.size() - 1);
+		
+		// ******   debug ******
+		
+		System.out.println("Threshold: " + threshold);
+		System.out.println("g: " + g);
+		System.out.println("Iteration: " + this.iteration++);
+		node.drawState();
+		
+		// ******   debug ******
+		
+		
 		double f = g + node.getHeuristic();
 		if(f > threshold) return f;
-		
-		// ** For debug **
-		if(!visited.contains(node)) visited.add(node);
-		// ** For debug **
 		
 		if(node.isGoal()) {
 			System.out.println("found!");
@@ -72,7 +66,7 @@ public class IDAStar {
 		for(IDAStarSuccessor succ : node.getSuccessors()) {
 			if(!path.contains(succ.getNode())) {
 				path.add(succ.getNode());
-				double t = search(path, g + succ.getCost(), threshold, visited);
+				double t = search(path, g + succ.getCost(), threshold);
 				if(t == -1) return -1;
 				if(t < min) min = t;
 				path.remove(path.size() - 1);
