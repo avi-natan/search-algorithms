@@ -138,7 +138,8 @@ public class ILBFS {
 			
 			// restore macro
 			// foreach child C of best do
-			for(ILBFSNode c : best.getChildren()) {
+			List<ILBFSNode> bestChildren = best.getChildren();
+			for(ILBFSNode c : bestChildren) {
 				// F(C) <- f(C)
 				c.setF(c.getf());
 				
