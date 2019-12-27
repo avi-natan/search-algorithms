@@ -7,8 +7,11 @@ import algorithms.ILBFSNode;
 
 public class PancakeProblemILBFSNode implements ILBFSNode{
 	
+	private static long ID = 0;
+	
 	private int[] pile;
 	private PancakeProblemILBFSNode parent;
+	private long id;
 	
 	private double g;
 	private double h;
@@ -18,11 +21,18 @@ public class PancakeProblemILBFSNode implements ILBFSNode{
 	public PancakeProblemILBFSNode(int[] pile, PancakeProblemILBFSNode parent, double g) {
 		this.pile = pile;
 		this.parent = parent;
+		this.id = ID;
+		ID++;
 		
 		this.g = g;
 		this.h = calculate_h();
 		this.f = this.g + this.h;
 		this.F = Double.MAX_VALUE;
+	}
+	
+	@Override
+	public long getId() {
+		return this.id;
 	}
 
 	@Override

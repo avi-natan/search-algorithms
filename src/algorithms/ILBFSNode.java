@@ -4,6 +4,7 @@ import java.util.List;
 
 public interface ILBFSNode {
 	
+	public long getId();
 	public String getName();
 	public boolean isGoal();
 	public List<ILBFSNode> getChildren();

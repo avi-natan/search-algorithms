@@ -49,15 +49,15 @@ public class ILBFS {
 					return 1;
 				} else {
 					// F is same, comparing if the node is collapsed or not. prio to the one that is not collapsed
-					if(first.getF() == first.getf() && second.getF() > second.getf()) {
+					if(first.getg() > second.getg()) {
 						return -1;
-					} else if(first.getF() > first.getf() && second.getF() == second.getf()) {
+					} else if(first.getg() < second.getg()) {
 						return 1;
 					} else {
 						// both nodes are collapsed or both are not collapsed, compare lexicographically. lexical prio
-						if (first.getName().compareTo(second.getName()) < 0) {
+						if (first.getId() < second.getId()) {
 							return -1;
-						} else if(first.getName().compareTo(second.getName()) > 0) {
+						} else if(first.getId() > second.getId()) {
 							return 1;
 						} else {
 							return 0;
@@ -88,6 +88,8 @@ public class ILBFS {
 			System.out.println("Iteration: " + iteration);
 			System.out.println("Times seen: " + state_names.get(best.getName()));
 			System.out.println("Open list size after best extraction: " + open.size());
+			System.out.println("best.id: " + best.getId());
+			if(best.getId() != 0) System.out.println("best.parent.id: " + best.getParent().getId());
 			System.out.println("best.g: " + best.getg());
 			System.out.println("best.h: " + best.geth());
 			System.out.println("best.f: " + best.getf());
@@ -112,7 +114,13 @@ public class ILBFS {
 			// while (oldbest != best.parent) do
 			while(oldbest != null && !oldbest.equals(best.getParent())) {
 				// oldbest.val <- min(values of oldbest children)
-				List<ILBFSNode> oldbestChildren = oldbest.getChildren();
+//				List<ILBFSNode> oldbestChildren = oldbest.getChildren();
+				List<ILBFSNode> oldbestChildren = new ArrayList<ILBFSNode>();
+				for(ILBFSNode c : open) {
+					if(c.getParent() == oldbest) {
+						oldbestChildren.add(c);
+					}
+				}
 				// do this only if this node has children (i.e. not a dead end)
 				if(!oldbestChildren.isEmpty()) {
 					Double minFVal = Double.MAX_VALUE;

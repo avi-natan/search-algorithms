@@ -7,6 +7,8 @@ import algorithms.ILBFSNode;
 
 public class FifteenPuzzleILBFSNode implements ILBFSNode {
 	
+	private static long ID = 0;
+	
 	private static final int[][] GOAL_STATE =
 		{
 				{0, 1, 2, 3},
@@ -17,7 +19,8 @@ public class FifteenPuzzleILBFSNode implements ILBFSNode {
 	
 	private int[][] state;
 	private FifteenPuzzleILBFSNode parent;
-	
+	private long id;
+
 	private double g;
 	private double h;
 	private double f;
@@ -26,10 +29,18 @@ public class FifteenPuzzleILBFSNode implements ILBFSNode {
 	public FifteenPuzzleILBFSNode(int[][] state, FifteenPuzzleILBFSNode parent, double g) {
 		this.state = state;
 		this.parent = parent;
+		this.id = ID;
+		ID++;
+		
 		this.g = g;
 		this.h = calculate_h();
 		this.f = this.g + this.h;
 		this.F = Double.MAX_VALUE;
+	}
+	
+	@Override
+	public long getId() {
+		return this.id;
 	}
 
 	@Override

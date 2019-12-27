@@ -7,6 +7,9 @@ import algorithms.ILBFSNode;
 
 public class CustomILBFSProblemNode implements ILBFSNode{
 	
+	private static long ID = 0;
+	
+	private long id;
 	private String name;
 	private boolean isGoal;
 	private List<ILBFSNode> children;
@@ -18,6 +21,8 @@ public class CustomILBFSProblemNode implements ILBFSNode{
 	
 	public CustomILBFSProblemNode(String name, boolean isGoal, double f, double F) {
 		super();
+		this.id = ID;
+		ID++;
 		this.name = name;
 		this.isGoal = isGoal;
 		this.children = new ArrayList<ILBFSNode>();
@@ -32,6 +37,11 @@ public class CustomILBFSProblemNode implements ILBFSNode{
 	
 	public void setParent(ILBFSNode parent) {
 		this.parent = parent;
+	}
+	
+	@Override
+	public long getId() {
+		return this.id;
 	}
 
 	@Override
