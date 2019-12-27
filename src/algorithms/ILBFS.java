@@ -48,7 +48,7 @@ public class ILBFS {
 				} else if (first.getF() > second.getF()) {
 					return 1;
 				} else {
-					// F is same, comparing if the node is collapsed or not. prio to the one that is not collapsed
+					// F is same, comparing the g values. prio to a node that has a higher g value (prio to the furthest travelled)
 					if(first.getg() > second.getg()) {
 						return -1;
 					} else if(first.getg() < second.getg()) {
