@@ -43,7 +43,7 @@ public class PancakeProblemILBFSNode implements ILBFSNode{
 			name += "," + i;
 		}
 		name = name.substring(1);
-		return "stack" + name;
+		return "pile" + name;
 	}
 
 	@Override

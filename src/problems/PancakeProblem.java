@@ -2,6 +2,8 @@ package problems;
 
 import java.util.List;
 
+import algorithms.IDAStar;
+import algorithms.IDAStarNode;
 import algorithms.ILBFS;
 import algorithms.ILBFSNode;
 
@@ -20,7 +22,7 @@ public class PancakeProblem {
 
 	private static void testILBFS() {
 
-		int[] startState1 = new int[] {1, 6, 2, 5, 3, 4, 7, 9, 10, 8};
+		int[] startState1 = new int[] {1, 6, 2, 5, 3, 4, 7, 9, 10, 8, 11, 12, 20, 19, 18, 17, 13, 16, 15, 14};
 		ILBFSNode start1 = new PancakeProblemILBFSNode(startState1, null, 0);
 		ILBFS ilbfs1 = new ILBFS(start1);
 		List<ILBFSNode> path1 = ilbfs1.findPathToGoal();
@@ -33,7 +35,16 @@ public class PancakeProblem {
 	}
 
 	private static void testIDAStar() {
-		// TODO Auto-generated method stub
+		
+		int[] startState1 = new int[] {1, 6, 2, 5, 3, 4, 7, 9, 10, 8, 11, 12, 20, 19, 18, 17, 13, 16, 15, 14};
+		IDAStarNode start1 = new PancakeProblemIDAStarNode(startState1);
+		IDAStar idastar1 = new IDAStar(start1);
+		List<IDAStarNode> path1 = idastar1.findPathToGoal();
+		System.out.println("path to goal:");
+		for(IDAStarNode n : path1) {
+			n.drawState();
+		}
+		System.out.println("moves: " + (path1.size() - 1));
 		
 	}
 
