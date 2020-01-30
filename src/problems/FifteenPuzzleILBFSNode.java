@@ -104,7 +104,9 @@ public class FifteenPuzzleILBFSNode implements ILBFSNode {
 			new_state[blankI][blankJ] = this.state[blankI-1][blankJ];
 			new_state[blankI-1][blankJ] = 0;
 			ILBFSNode child = new FifteenPuzzleILBFSNode(new_state, this, this.g+1);
-			children.add(child);
+			if(this.parent == null || !child.getName().equals(this.parent.getName())) {
+				children.add(child);
+			}
 		}
 		
 		// can swipe blank to bottom
@@ -118,7 +120,9 @@ public class FifteenPuzzleILBFSNode implements ILBFSNode {
 			new_state[blankI][blankJ] = this.state[blankI+1][blankJ];
 			new_state[blankI+1][blankJ] = 0;
 			ILBFSNode child = new FifteenPuzzleILBFSNode(new_state, this, this.g+1);
-			children.add(child);
+			if(this.parent == null || !child.getName().equals(this.parent.getName())) {
+				children.add(child);
+			}
 		}
 		
 		// can swipe blank to left
@@ -132,7 +136,9 @@ public class FifteenPuzzleILBFSNode implements ILBFSNode {
 			new_state[blankI][blankJ] = this.state[blankI][blankJ-1];
 			new_state[blankI][blankJ-1] = 0;
 			ILBFSNode child = new FifteenPuzzleILBFSNode(new_state, this, this.g+1);
-			children.add(child);
+			if(this.parent == null || !child.getName().equals(this.parent.getName())) {
+				children.add(child);
+			}
 		}
 		
 		// can swipe blank to right
@@ -146,7 +152,9 @@ public class FifteenPuzzleILBFSNode implements ILBFSNode {
 			new_state[blankI][blankJ] = this.state[blankI][blankJ+1];
 			new_state[blankI][blankJ+1] = 0;
 			ILBFSNode child = new FifteenPuzzleILBFSNode(new_state, this, this.g+1);
-			children.add(child);
+			if(this.parent == null || !child.getName().equals(this.parent.getName())) {
+				children.add(child);
+			}
 		}
 		
 		return children;

@@ -30,6 +30,7 @@ public class ILBFS {
 		// ********** DEBUG ************
 		Map<String, Integer> state_names = new HashMap<String, Integer>();
 		int iteration = 0;
+		int maxOpenSize = 0;
 		// ********** DEBUG ************
 		
 		// the path to return
@@ -85,9 +86,11 @@ public class ILBFS {
 			} else {
 				state_names.put(best.getName(), 1);
 			}
+			maxOpenSize = Math.max(maxOpenSize, open.size());
 			System.out.println("Iteration: " + iteration);
 			System.out.println("Times seen: " + state_names.get(best.getName()));
 			System.out.println("Open list size after best extraction: " + open.size());
+			System.out.println("Max open list size after best extraction: " + maxOpenSize);
 			System.out.println("best.id: " + best.getId());
 			if(best.getId() != 0) System.out.println("best.parent.id: " + best.getParent().getId());
 			System.out.println("best.g: " + best.getg());
