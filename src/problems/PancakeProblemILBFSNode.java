@@ -76,7 +76,10 @@ public class PancakeProblemILBFSNode implements ILBFSNode{
 			}
 			
 			ILBFSNode child = new PancakeProblemILBFSNode(new_pile, this, this.g+1);
-			children.add(child);
+//			children.add(child);
+			if(this.parent == null || !child.getName().equals(this.parent.getName())) {
+				children.add(child);
+			}
 			
 		}
 		

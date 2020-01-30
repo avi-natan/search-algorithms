@@ -9,9 +9,11 @@ import algorithms.IDAStarSuccessor;
 public class PancakeProblemIDAStarNode implements IDAStarNode {
 	
 	private int[] pile;
+	private PancakeProblemIDAStarNode parent;
 	
-	public PancakeProblemIDAStarNode(int[] pile) {
+	public PancakeProblemIDAStarNode(int[] pile, PancakeProblemIDAStarNode parent) {
 		this.pile = pile;
+		this.parent = parent;
 	}
 
 	@Override
@@ -54,9 +56,11 @@ public class PancakeProblemIDAStarNode implements IDAStarNode {
 				new_pile[j] = pile[pile.length-1 - j + i];
 			}
 			
-			IDAStarNode child = new PancakeProblemIDAStarNode(new_pile);
-			IDAStarSuccessor successor = new IDAStarSuccessor(1.0, child);
-			successors.add(successor);
+			IDAStarNode child = new PancakeProblemIDAStarNode(new_pile, this);
+			if(this.parent == null || !child.getName().equals(this.parent.getName())) {
+				IDAStarSuccessor successor = new IDAStarSuccessor(1.0, child);
+				successors.add(successor);
+			}
 			
 		}
 		

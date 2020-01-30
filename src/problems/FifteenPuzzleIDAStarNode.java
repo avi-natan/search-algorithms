@@ -17,10 +17,11 @@ public class FifteenPuzzleIDAStarNode implements IDAStarNode {
 		};
 	
 	private int[][] state;
+	private FifteenPuzzleIDAStarNode parent;
 	
-	
-	public FifteenPuzzleIDAStarNode(int[][] state) {
+	public FifteenPuzzleIDAStarNode(int[][] state, FifteenPuzzleIDAStarNode parent) {
 		this.state = state;
+		this.parent = parent;
 	}
 	
 	@Override
@@ -83,9 +84,11 @@ public class FifteenPuzzleIDAStarNode implements IDAStarNode {
 			}
 			new_state[blankI][blankJ] = this.state[blankI-1][blankJ];
 			new_state[blankI-1][blankJ] = 0;
-			IDAStarNode child = new FifteenPuzzleIDAStarNode(new_state);
-			IDAStarSuccessor successor = new IDAStarSuccessor(1.0, child);
-			successors.add(successor);
+			IDAStarNode child = new FifteenPuzzleIDAStarNode(new_state, this);
+			if(this.parent == null || !child.getName().equals(this.parent.getName())) {
+				IDAStarSuccessor successor = new IDAStarSuccessor(1.0, child);
+				successors.add(successor);
+			}
 		}
 		
 		// can swipe blank to bottom
@@ -98,9 +101,11 @@ public class FifteenPuzzleIDAStarNode implements IDAStarNode {
 			}
 			new_state[blankI][blankJ] = this.state[blankI+1][blankJ];
 			new_state[blankI+1][blankJ] = 0;
-			IDAStarNode child = new FifteenPuzzleIDAStarNode(new_state);
-			IDAStarSuccessor successor = new IDAStarSuccessor(1.0, child);
-			successors.add(successor);
+			IDAStarNode child = new FifteenPuzzleIDAStarNode(new_state, this);
+			if(this.parent == null || !child.getName().equals(this.parent.getName())) {
+				IDAStarSuccessor successor = new IDAStarSuccessor(1.0, child);
+				successors.add(successor);
+			}
 		}
 		
 		// can swipe blank to left
@@ -113,9 +118,11 @@ public class FifteenPuzzleIDAStarNode implements IDAStarNode {
 			}
 			new_state[blankI][blankJ] = this.state[blankI][blankJ-1];
 			new_state[blankI][blankJ-1] = 0;
-			IDAStarNode child = new FifteenPuzzleIDAStarNode(new_state);
-			IDAStarSuccessor successor = new IDAStarSuccessor(1.0, child);
-			successors.add(successor);
+			IDAStarNode child = new FifteenPuzzleIDAStarNode(new_state, this);
+			if(this.parent == null || !child.getName().equals(this.parent.getName())) {
+				IDAStarSuccessor successor = new IDAStarSuccessor(1.0, child);
+				successors.add(successor);
+			}
 		}
 		
 		// can swipe blank to right
@@ -128,9 +135,11 @@ public class FifteenPuzzleIDAStarNode implements IDAStarNode {
 			}
 			new_state[blankI][blankJ] = this.state[blankI][blankJ+1];
 			new_state[blankI][blankJ+1] = 0;
-			IDAStarNode child = new FifteenPuzzleIDAStarNode(new_state);
-			IDAStarSuccessor successor = new IDAStarSuccessor(1.0, child);
-			successors.add(successor);
+			IDAStarNode child = new FifteenPuzzleIDAStarNode(new_state, this);
+			if(this.parent == null || !child.getName().equals(this.parent.getName())) {
+				IDAStarSuccessor successor = new IDAStarSuccessor(1.0, child);
+				successors.add(successor);
+			}
 		}
 		
 		return successors;

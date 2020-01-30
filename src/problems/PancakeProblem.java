@@ -43,7 +43,7 @@ public class PancakeProblem {
 	private static void testIDAStar() {
 		
 		int[] startState1 = new int[] {1, 6, 2, 5, 3, 4, 7, 9, 10, 8, 11, 12, 20, 19, 18, 17, 13, 16, 15, 14};
-		IDAStarNode start1 = new PancakeProblemIDAStarNode(startState1);
+		IDAStarNode start1 = new PancakeProblemIDAStarNode(startState1, null);
 		IDAStar idastar1 = new IDAStar(start1);
 		Instant begin1 = Instant.now();
 		List<IDAStarNode> path1 = idastar1.findPathToGoal();

@@ -184,24 +184,24 @@ public class FifteenPuzzle {
 		 */
 		
 		// custom state
-//		int[][] startState = new int[][] 
-//				{	{1, 3, 4, 5},
-//					{8, 6, 7, 2},
-//					{9, 14, 12, 13},
-//					{10, 11, 0, 15}
-//				};
-//		IDAStarNode start = new FifteenPuzzleIDAStarNode(startState);
-//		IDAStar idastar = new IDAStar(start);
-//		Instant begin = Instant.now();
-//		List<IDAStarNode> path = idastar.findPathToGoal();
-//		Instant end = Instant.now();
-//		Duration interval = Duration.between(begin, end);
-//		System.out.println("path to goal:");
-//		for(IDAStarNode n : path) {
-//			n.drawState();
-//		}
-//		System.out.println("moves: " + (path.size() - 1));
-//		System.out.println("time in seconds: " + interval.getSeconds());
+		int[][] startState = new int[][] 
+				{	{12, 5, 4, 2},
+					{1, 14, 9, 3},
+					{13, 0, 6, 11},
+					{8, 10, 15, 7}
+				};
+		IDAStarNode start = new FifteenPuzzleIDAStarNode(startState, null);
+		IDAStar idastar = new IDAStar(start);
+		Instant begin = Instant.now();
+		List<IDAStarNode> path = idastar.findPathToGoal();
+		Instant end = Instant.now();
+		Duration interval = Duration.between(begin, end);
+		System.out.println("path to goal:");
+		for(IDAStarNode n : path) {
+			n.drawState();
+		}
+		System.out.println("moves: " + (path.size() - 1));
+		System.out.println("time in seconds: " + interval.getSeconds());
 		
 		// solving for state 1
 //		int[][] startState1 = new int[][] 
